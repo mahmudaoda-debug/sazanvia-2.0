@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𐌔ΛⱿΛNVłΛ 𖤍 — Sazanvia Encyclopedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        sazanvia: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            500: '#c57b57',
+                            800: '#5c3322',
+                            900: '#381d13',
+                            gold: '#d4af37',
+                            dark: '#0f0e0e',
+                            card: '#181717',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-sazanvia-dark text-gray-100 min-h-screen flex flex-col justify-between selection:bg-sazanvia-gold selection:text-black">
+
+    <header class="w-full border-b border-white/10 backdrop-blur-md bg-sazanvia-dark/80 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-sazanvia-gold text-xs sm:text-sm font-medium transition-colors border border-white/10">
+                    <span>← BACK TO HOME</span>
+                </a>
+                <span class="text-xl sm:text-2xl text-sazanvia-gold tracking-widest font-bold hidden sm:inline">𐌔ΛⱿΛNVłΛ 𖤍</span>
+            </div>
+            
+            <!-- Category Navigation Bar / Tabs -->
+            <nav class="hidden lg:flex items-center space-x-1 text-xs font-medium bg-sazanvia-card p-1.5 rounded-xl border border-white/10">
+                <button onclick="switchTab('about')" class="tab-btn active px-3 py-1.5 rounded-lg transition-all" data-target="about">About</button>
+                <button onclick="switchTab('government')" class="tab-btn px-3 py-1.5 rounded-lg transition-all" data-target="government">Government</button>
+                <button onclick="switchTab('history')" class="tab-btn px-3 py-1.5 rounded-lg transition-all" data-target="history">History</button>
+                <button onclick="switchTab('geography')" class="tab-btn px-3 py-1.5 rounded-lg transition-all" data-target="geography">Geography</button>
+                <button onclick="switchTab('religion')" class="tab-btn px-3 py-1.5 rounded-lg transition-all" data-target="religion">Religion</button>
+                <button onclick="switchTab('economy')" class="tab-btn px-3 py-1.5 rounded-lg transition-all" data-target="economy">Economy</button>
+                <button onclick="switchTab('military')" class="tab-btn px-3 py-1.5 rounded-lg transition-all" data-target="military">Military</button>
+                <button onclick="switchTab('navy')" class="tab-btn px-3 py-1.5 rounded-lg transition-all" data-target="navy">Navy</button>
+                <button onclick="switchTab('space')" class="tab-btn px-3 py-1.5 rounded-lg transition-all" data-target="space">Space</button>
+                <button onclick="switchTab('media')" class="tab-btn px-3 py-1.5 rounded-lg transition-all" data-target="media">Media</button>
+            </nav>
+
+            <!-- Mobile Menu Toggle for Encyclopedia -->
+            <button id="mobile-encyclopedia-btn" aria-label="Toggle menu" class="lg:hidden text-gray-300 hover:text-white p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Encyclopedia Categories Dropdown -->
+        <div id="mobile-encyclopedia-menu" class="hidden lg:hidden bg-sazanvia-card border-b border-white/10 px-4 py-3 grid grid-cols-2 gap-2">
+            <button onclick="switchTab('about'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-sazanvia-gold font-medium">About Sazanvia</button>
+            <button onclick="switchTab('government'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-gray-300">Government (Lore)</button>
+            <button onclick="switchTab('history'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-gray-300">History (1922)</button>
+            <button onclick="switchTab('geography'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-gray-300">Geography</button>
+            <button onclick="switchTab('religion'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-gray-300">Religion (Islam)</button>
+            <button onclick="switchTab('economy'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-gray-300">Economy</button>
+            <button onclick="switchTab('military'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-gray-300">Military</button>
+            <button onclick="switchTab('navy'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-gray-300">Navy</button>
+            <button onclick="switchTab('space'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-gray-300">Space (SSA)</button>
+            <button onclick="switchTab('media'); toggleMobileEnc();" class="text-left px-3 py-2 rounded-lg bg-white/5 text-xs text-gray-300">Media Database</button>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        
+        <!-- Page Title Banner -->
+        <div class="mb-10 text-center sm:text-left flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-6">
+            <div>
+                <div class="text-sazanvia-gold text-xs font-semibold tracking-widest uppercase mb-1">𐌔ΛⱿΛNVłΛ 𖤍 ENCYCLOPEDIA DATABASE</div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-white">Sazanvia Knowledge Base</h1>
+            </div>
+            <div class="mt-4 sm:mt-0 flex items-center justify-center sm:justify-end gap-3">
+                <span class="px-3 py-1 rounded-full bg-amber-500/10 text-sazanvia-gold border border-amber-500/20 text-xs font-mono">Current Timeline: 2026</span>
+                <span class="px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10 text-xs font-mono">Author: M. Umar Jibran</span>
+            </div>
+        </div>
+
+        <!-- Layout with Sidebar for Categories on Desktop -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <!-- Sidebar Navigation -->
+            <aside class="hidden lg:block lg:col-span-1 space-y-2 sticky top-28 self-start">
+                <div class="p-4 rounded-2xl bg-sazanvia-card border border-white/10 space-y-1">
+                    <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2">Categories</div>
+                    <button onclick="switchTab('about')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all active flex items-center justify-between" data-target="about">
+                        <span>About Sazanvia</span>
+                        <span class="text-xs text-sazanvia-gold">01</span>
+                    </button>
+                    <button onclick="switchTab('government')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between" data-target="government">
+                        <span>Government (Lore)</span>
+                        <span class="text-xs text-gray-400">02</span>
+                    </button>
+                    <button onclick="switchTab('history')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between" data-target="history">
+                        <span>History</span>
+                        <span class="text-xs text-gray-400">03</span>
+                    </button>
+                    <button onclick="switchTab('geography')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between" data-target="geography">
+                        <span>Geography</span>
+                        <span class="text-xs text-gray-400">04</span>
+                    </button>
+                    <button onclick="switchTab('religion')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between" data-target="religion">
+                        <span>Religion</span>
+                        <span class="text-xs text-gray-400">05</span>
+                    </button>
+                    <button onclick="switchTab('economy')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between" data-target="economy">
+                        <span>Economy</span>
+                        <span class="text-xs text-gray-400">06</span>
+                    </button>
+                    <button onclick="switchTab('military')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between" data-target="military">
+                        <span>Military</span>
+                        <span class="text-xs text-gray-400">07</span>
+                    </button>
+                    <button onclick="switchTab('navy')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between" data-target="navy">
+                        <span>Navy</span>
+                        <span class="text-xs text-gray-400">08</span>
+                    </button>
+                    <button onclick="switchTab('space')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between" data-target="space">
+                        <span>Space (SSA)</span>
+                        <span class="text-xs text-gray-400">09</span>
+                    </button>
+                    <button onclick="switchTab('media')" class="side-tab-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between" data-target="media">
+                        <span>Media</span>
+                        <span class="text-xs text-gray-400">10</span>
+                    </button>
+                </div>
+
+                <!-- Quick Return Box -->
+                <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-950/40 to-sazanvia-card border border-amber-500/20 text-center">
+                    <p class="text-xs text-amber-200/80 mb-3">Ing Kembali ke Landing Page?</p>
+                    <a href="index.html" class="block w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-medium text-xs transition-colors">
+                        ← BACK TO HOME
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content Panels -->
+            <div class="lg:col-span-3 space-y-6">
+
+                <!-- SECTION 1: ABOUT SAZANVIA -->
+                <div id="section-about" class="encyc-section space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">ℹ️</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">About Sazanvia</h2>
+                                <p class="text-xs text-gray-400">Overview & Core Identity</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4 text-gray-300 leading-relaxed">
+                            <p class="text-lg font-medium text-amber-200">
+                                "Sazanvia adalah negara yang terletak di Mesir, Palestina, dan utara Arab. Adalah negara Islam yang berdiameter 1900 m ±."
+                            </p>
+                            <p class="text-sm text-gray-400">
+                                Sazanvia berdiri sebagai entitas fiksi yang berdaulat dalam semesta Negfik. Dengan luas dan karakteristik unik berdiameter 1,900 meter, negara ini menggabungkan nilai-nilai spiritual Islam dengan kemajuan teknologi mutakhir, termasuk pencapaian luar angkasa hingga Pluto melalui Sazanvia Space Agency (SSA).
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/5">
+                                <span class="text-xs text-gray-400 block mb-1">Lokasi Canon</span>
+                                <span class="text-sm font-semibold text-white">Mesir, Palestina, Utara Arab</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/5">
+                                <span class="text-xs text-gray-400 block mb-1">Skala / Diameter</span>
+                                <span class="text-sm font-semibold text-sazanvia-gold">1,900 m ±</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/5">
+                                <span class="text-xs text-gray-400 block mb-1">Agama Resmi</span>
+                                <span class="text-sm font-semibold text-white">Islam</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: GOVERNMENT (LORE BARU) -->
+                <div id="section-government" class="encyc-section hidden space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">🏛️</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">Government & Governance</h2>
+                                <p class="text-xs text-sazanvia-gold font-mono">LORE FIKSI SAZANVIA (Dibuat Khusus untuk Proyek Negfik)</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200/90">
+                            ⚠️ <strong>Catatan Lore:</strong> Data pemerintahan di bawah ini adalah lore fiksi baru yang dirancang khusus untuk konsistensi dunia Sazanvia, disesuaikan dengan sejarah sejak 1922 hingga tahun 2026.
+                        </div>
+
+                        <div class="space-y-6 text-gray-300">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-sazanvia-gold"></span>
+                                        Sistem Pemerintahan
+                                    </h3>
+                                    <p class="text-sm text-gray-300 leading-relaxed">
+                                        <strong>Teokrasi Konstitusional Islam (Islamic Constitutional Technocracy):</strong> Dipimpin oleh seorang Supreme Council of Ministers yang dikoordinasikan secara kolektif berdasarkan musyawarah mufakat para ulama dan teknokrat senior, menjaga kemurnian nilai Islam serta kemajuan sains modern.
+                                    </p>
+                                </div>
+
+                                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-sazanvia-gold"></span>
+                                        Struktur Eksekutif & Parlemen
+                                    </h3>
+                                    <p class="text-sm text-gray-300 leading-relaxed">
+                                        <strong>Majelis Syura Al-Sazanvia:</strong> Dewan legislatif tertinggi yang beranggotakan perwakilan wilayah Mesir, Palestina, dan Utara Arab Sazanvia. Menetapkan hukum berdasarkan syariat Islam yang diadaptasi untuk skala negara berdiameter 1.900 meter.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                <h3 class="text-lg font-bold text-white">Kebijakan Otoritas & Administrasi (2026)</h3>
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-2">
+                                    <li><strong>Otoritas Wilayah Terpadu:</strong> Koordinasi pusat yang efisien mengingat ukuran unik wilayah seluas 1,900 m ±.</li>
+                                    <li><strong>Kementerian Sains & Angkasa:</strong> Mengawasi operasional Sazanvia Space Agency (SSA) dan ekspedisi luar angkasa.</li>
+                                    <li><strong>Sistem Keuangan Mandiri:</strong> Pengelolaan moneter berbasis Sazanvia Rubels tanpa ketergantungan pada fiat eksternal.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: HISTORY -->
+                <div id="section-history" class="encyc-section hidden space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">📜</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">History & Timeline</h2>
+                                <p class="text-xs text-gray-400">Canon Historical Records</p>
+                            </div>
+                        </div>
+
+                        <div class="relative border-l-2 border-sazanvia-gold/30 ml-4 pl-6 space-y-8 py-4">
+                            <div class="relative">
+                                <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-sazanvia-gold border-4 border-sazanvia-dark"></div>
+                                <span class="text-xs font-mono text-sazanvia-gold font-bold">1922</span>
+                                <h3 class="text-xl font-bold text-white mt-1">Formation of Sazanvia</h3>
+                                <p class="text-sm text-gray-400 mt-2">
+                                    Titik awal berdirinya negara fiksi Sazanvia di wilayah Mesir, Palestina, dan utara Arab. Berdasarkan data canon resmi, tahun 1922 menandai proklamasi dan penetapan wilayah kedaulatan Sazanvia.
+                                </p>
+                            </div>
+
+                            <div class="relative">
+                                <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-white/20 border-4 border-sazanvia-dark"></div>
+                                <span class="text-xs font-mono text-gray-400">2026 (Timeline Saat Ini)</span>
+                                <h3 class="text-xl font-bold text-white mt-1">Era Modern & Eksplorasi Pluto</h3>
+                                <p class="text-sm text-gray-400 mt-2">
+                                    Sazanvia berkembang pesat sebagai negara Islam modern dengan kapabilitas antariksa melalui SSA (Sazanvia Space Agency) yang telah mencapai jangkauan hingga Pluto.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: GEOGRAPHY -->
+                <div id="section-geography" class="encyc-section hidden space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">🗺️</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">Geography & Territory</h2>
+                                <p class="text-xs text-gray-400">Spatial Dimensions & Location</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Geographical Location</h3>
+                                <p class="text-xl font-bold text-white">Mesir, Palestina, dan Utara Arab</p>
+                                <p class="text-xs text-gray-400">Wilayah strategis yang terintegrasi dalam batas kedaulatan mutlak Sazanvia.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Diameter Negara</h3>
+                                <p class="text-xl font-bold text-sazanvia-gold">1,900 m ±</p>
+                                <p class="text-xs text-gray-400">Skala unik berdiameter 1.900 meter yang diatur dengan tata kota terpadu.</p>
+                            </div>
+                        </div>
+
+                        <!-- CSS/SVG Topological Visualizer -->
+                        <div class="p-6 rounded-2xl bg-stone-950 border border-white/10 text-center space-y-4">
+                            <h4 class="text-sm font-semibold text-sazanvia-gold">Visualisasi Topologi Sazanvia (1,900 m ±)</h4>
+                            <div class="relative w-full h-48 flex items-center justify-center overflow-hidden rounded-xl bg-black/40 border border-white/5">
+                                <!-- Geometric SVG representation -->
+                                <svg class="w-full h-full" viewBox="0 0 600 200" fill="none">
+                                    <circle cx="300" cy="100" r="80" stroke="#d4af37" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+                                    <circle cx="300" cy="100" r="50" stroke="#c57b57" stroke-width="1.5" opacity="0.8"/>
+                                    <circle cx="300" cy="100" r="20" fill="#d4af37" opacity="0.9"/>
+                                    <text x="300" y="105" fill="#0f0e0e" font-size="10" font-weight="bold" text-anchor="middle">ZON 0</text>
+                                    <text x="300" y="30" fill="#d4af37" font-size="12" font-family="monospace" text-anchor="middle">DIAMETER: 1,900 M ±</text>
+                                    <text x="150" y="180" fill="#9ca3af" font-size="10" text-anchor="middle">Mesir Sector</text>
+                                    <text x="300" y="180" fill="#9ca3af" font-size="10" text-anchor="middle">Palestina Sector</text>
+                                    <text x="450" y="180" fill="#9ca3af" font-size="10" text-anchor="middle">Utara Arab Sector</text>
+                                </svg>
+                            </div>
+                            <p class="text-xs text-gray-400">Representasi geometris tata wilayah fiksi Sazanvia tanpa menggunakan peta gambar eksternal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: RELIGION -->
+                <div id="section-religion" class="encyc-section hidden space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">☪️</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">Religion & Ideology</h2>
+                                <p class="text-xs text-gray-400">Faith & Spiritual Canon</p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                            <h3 class="text-sm font-semibold text-gray-400 uppercase">Agama Resmi Negara</h3>
+                            <p class="text-3xl font-extrabold text-sazanvia-gold">Islam</p>
+                            <p class="text-sm text-gray-300 leading-relaxed">
+                                Sazanvia didirikan dan dijalankan atas prinsip-prinsip ajaran Islam yang mulia. Nilai-nilai keislaman menjadi landasan hukum, moral sosial, etika sains, dan arah pembangunan nasional sejak tahun 1922 hingga 2026.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 6: ECONOMY -->
+                <div id="section-economy" class="encyc-section hidden space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">🪙</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">Economy & Currency</h2>
+                                <p class="text-xs text-gray-400">Monetary System & Financial Database</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Mata Uang Resmi</h3>
+                                <p class="text-2xl font-bold text-sazanvia-gold">Sazanvia Rubels</p>
+                                <p class="text-xs text-gray-400">Alat tukar sah yang digunakan di seluruh sektor ekonomi Sazanvia.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Indikator Ekonomi Makro</h3>
+                                <p class="text-xl font-bold text-white">Data sedang dikembangkan.</p>
+                                <p class="text-xs text-gray-400">Laporan neraca perdagangan dan indeks kesejahteraan dalam tahap penyusunan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 7: MILITARY -->
+                <div id="section-military" class="encyc-section hidden space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">🛡️</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">Military Database</h2>
+                                <p class="text-xs text-gray-400">Defense & Security Forces</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Land Force</h3>
+                                <p class="text-lg font-bold text-white">Data sedang dikembangkan.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Air Force</h3>
+                                <p class="text-lg font-bold text-white">Data sedang dikembangkan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 8: NAVY -->
+                <div id="section-navy" class="encyc-section hidden space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">⚓</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">Sazanvia Navy</h2>
+                                <p class="text-xs text-gray-400">Naval Fleet Database</p>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-300">
+                            Sazanvia memiliki angkatan laut yang bertugas mengamankan perairan teritorial strategis. Berikut adalah database armada:
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                                <h3 class="text-sm font-semibold text-sazanvia-gold uppercase">Battleship</h3>
+                                <p class="text-base font-bold text-white">Data sedang dikembangkan.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                                <h3 class="text-sm font-semibold text-sazanvia-gold uppercase">Submarine</h3>
+                                <p class="text-base font-bold text-white">Data sedang dikembangkan.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                                <h3 class="text-sm font-semibold text-sazanvia-gold uppercase">Fleet Carrier</h3>
+                                <p class="text-base font-bold text-white">Data sedang dikembangkan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 9: SPACE -->
+                <div id="section-space" class="encyc-section hidden space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">🚀</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">SAZANVIA SPACE (SSA)</h2>
+                                <p class="text-xs text-gray-400">Space Agency & Interplanetary Reach</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Space Facility</h3>
+                                <p class="text-2xl font-bold text-sazanvia-gold">SSA (Sazanvia Space Agency)</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Maximum Reach</h3>
+                                <p class="text-2xl font-bold text-white">Pluto</p>
+                            </div>
+                        </div>
+
+                        <!-- CSS/SVG Orbit Simulation -->
+                        <div class="p-6 rounded-2xl bg-stone-950 border border-white/10 text-center space-y-4">
+                            <h4 class="text-sm font-semibold text-sazanvia-gold">Visualisasi Orbit Angkasa SSA (Hingga Pluto)</h4>
+                            <div class="relative w-full h-64 flex items-center justify-center overflow-hidden rounded-xl bg-black/60 border border-white/5">
+                                <svg class="w-full h-full" viewBox="0 0 600 300" fill="none">
+                                    <!-- Orbit circles -->
+                                    <ellipse cx="300" cy="150" rx="60" ry="30" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+                                    <ellipse cx="300" cy="150" rx="120" ry="60" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+                                    <ellipse cx="300" cy="150" rx="180" ry="90" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+                                    <ellipse cx="300" cy="150" rx="240" ry="120" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+                                    
+                                    <!-- Sun / Sazanvia Hub -->
+                                    <circle cx="300" cy="150" r="16" fill="#d4af37"/>
+                                    <text x="300" y="154" fill="#0f0e0e" font-size="8" font-weight="bold" text-anchor="middle">SSA</text>
+
+                                    <!-- Planets -->
+                                    <circle cx="360" cy="150" r="4" fill="#60a5fa"/>
+                                    <circle cx="420" cy="150" r="6" fill="#f87171"/>
+                                    <circle cx="540" cy="150" r="8" fill="#a78bfa"/>
+                                    <text x="540" y="130" fill="#d4af37" font-size="10" font-weight="bold" text-anchor="middle">PLUTO (MAX REACH)</text>
+                                </svg>
+                            </div>
+                            <p class="text-xs text-gray-400">Simulasi visual orbit interaktif menggunakan SVG CSS untuk kapabilitas penjelajahan luar angkasa SSA.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 10: MEDIA -->
+                <div id="section-media" class="encyc-section hidden space-y-6">
+                    <div class="p-8 rounded-3xl bg-sazanvia-card border border-white/10 shadow-xl space-y-6">
+                        <div class="flex items-center space-x-3 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-sazanvia-gold text-lg">📡</div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">Media Database</h2>
+                                <p class="text-xs text-gray-400">Broadcasting & Press Information</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Sazanvia National TV</h3>
+                                <p class="text-base font-bold text-white">Data sedang dikembangkan.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                                <h3 class="text-sm font-semibold text-gray-400 uppercase">Official Press & Gazette</h3>
+                                <p class="text-base font-bold text-white">Data sedang dikembangkan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-white/10 bg-sazanvia-dark py-8 px-4 sm:px-6 lg:px-8 text-center text-gray-400 text-sm mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-sazanvia-gold font-bold tracking-widest text-lg">
+                𐌔ΛⱿΛNVłΛ 𖤍
+            </div>
+            <div>
+                Created by M. Umar Jibran • Proyek Negfik Sazanvia
+            </div>
+            <div>
+                <a href="index.html" class="text-sazanvia-gold hover:underline font-medium">← BACK TO HOME</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
